@@ -11,6 +11,7 @@ import songRoutes from "./routes/song.route.js";
 import adminRoutes from "./routes/admin.route.js";
 import userRoutes from "./routes/user.route.js";
 import albumRoutes from "./routes/album.route.js";
+import statRoutes from "./routes/stat.route.js";
 
 config();
 const app = express();
@@ -41,6 +42,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
+app.use("/api/stats", statRoutes)
 
 app.listen(()=>{
     console.log(`Server Listening to PORT : ${PORT}`);
