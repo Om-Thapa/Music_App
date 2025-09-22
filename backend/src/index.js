@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
     cors({
-        origin:"http://local:3000",
+        origin:"http://localhost:3000",
         credentials: true,
     })
 )
@@ -43,6 +43,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statRoutes)
+app.get("hi", (req, res) => {
+    res.status(200).json({message : "Hello"});
+});
 
 app.listen(()=>{
     console.log(`Server Listening to PORT : ${PORT}`);

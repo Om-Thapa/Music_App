@@ -16,8 +16,8 @@ const SignInOAuthButton = () => {
         });
     };
   return (
-    <Button onClick={signInWithGoogle} className=" w-full text-white border-zinc-200 h-11" variant={"secondary"}>
-      <img src="/google.png" alt="Google" className="size-5" />
+    <Button onClick={signInWithGoogle} className=" w-auto text-white border-zinc-200 h-11" variant={"secondary"}>
+      <img src="https://www.transparentpng.com/thumb/google-logo/colorful-google-logo-transparent-clipart-download-u3DWLj.png" alt="Google" className="size-5" />
       Continue with Google
     </Button>
   )

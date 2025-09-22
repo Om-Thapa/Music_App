@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { protectRoute, requireAdmin } from "../middleware/auth.middleware";
-import { checkAdmin, createAlbum, createSong, deleteAlbum, deleteSong } from "../controller/admin.controller";
+import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
+import { checkAdmin, createAlbum, createSong, deleteAlbum, deleteSong } from "../controller/admin.controller.js";
 
 const router = Router();
 

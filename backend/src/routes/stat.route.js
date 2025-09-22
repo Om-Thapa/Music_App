@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { protectRoute, requireAdmin } from "../middleware/auth.middleware";
+import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
 import { Song } from "../models/song.model.js";
 import { Album } from "../models/album.model.js";
 import { User } from "../models/user.model.js";

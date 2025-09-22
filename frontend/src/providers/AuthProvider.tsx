@@ -21,7 +21,8 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
                 updateApiToken(null);
                 console.log("Error in auth provider : ", error);
             }finally{
-                setTimeout(() => setLoading(false), 2000);
+                // setTimeout(() => setLoading(false), 500);
+                setLoading(false)
             }
         }
 
