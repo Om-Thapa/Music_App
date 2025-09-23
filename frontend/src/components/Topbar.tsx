@@ -21,7 +21,6 @@ const Topbar = () => {
                     Admin DashBoard
                 </Link>
             )}
-        </div>
 
         <SignedIn>
             <SignOutButton />
@@ -32,6 +31,7 @@ const Topbar = () => {
         </SignedOut>
 
         <UserButton />
+        </div>
     </div>
   )
 }

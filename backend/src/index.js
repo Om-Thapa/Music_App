@@ -47,7 +47,7 @@ app.get("hi", (req, res) => {
     res.status(200).json({message : "Hello"});
 });
 
-app.listen(()=>{
+app.listen(PORT, ()=>{
     console.log(`Server Listening to PORT : ${PORT}`);
     connectDB();
 })
