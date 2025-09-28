@@ -2,12 +2,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useUserStore } from '@/stores/useUserStore';
 import { useUser } from '@clerk/clerk-react';
-import { HeadphonesIcon, Users } from 'lucide-react';
+import { HeadphonesIcon, Music, Users } from 'lucide-react';
 import { useEffect } from 'react'
 
 const FriendsActivity = () => {
     const { user } = useUser();
     const { users, fetchUsers } = useUserStore();
+    const isPlaying = true
+    
     useEffect(()=>{
         fetchUsers();
     }, [fetchUsers, user])
@@ -41,7 +43,17 @@ const FriendsActivity = () => {
                                 <div className='flex-1 min-w-0'>
                                     <div className="flex items-center gap-2">
                                         <span className='font-medium text-sm text-white'>{user.fullName}</span>
+                                        {isPlaying && <Music className='size-3.5 text-emerald-400 shrink-0'/>}
                                     </div>
+
+                                    {isPlaying ? (
+                                        <div>
+                                            <div className='text-sm text-white font-medium truncate'>I love you</div>
+                                            <div className='text-sm text-zinc-400 truncate'>Ash King</div>
+                                        </div>
+                                    ) : (
+                                        <div className='text-sm text-zinc-400'>Idle</div>
+                                    )}
                                 </div>
                             </div>
 
