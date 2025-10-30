@@ -18,7 +18,15 @@ const AdminPage = () => {
     fetchSongs();
     fetchStats();
   }, []);
-  if (!isAdmin && !isLoading) return <div>Unauthorized</div>;
+  if (!isAdmin && !isLoading)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="flex flex-col bg-zinc-800/50 px-8 py-4 space-y-2 rounded-xl">
+          <h1 className="text-xl font-bold text-zinc-200">Opps !</h1>
+          <div className="pb-1 text-red-500/80">You are Unauthorized</div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-black text-zinc-100 p-8">

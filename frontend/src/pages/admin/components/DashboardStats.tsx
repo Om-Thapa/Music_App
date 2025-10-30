@@ -23,7 +23,7 @@ const DashboardStats = () => {
     {
       icon: Users2,
       label: "Total Artists",
-      value: stats.totalArtists.toString(),
+      value: stats.totalArtists?.toString(),
       bgColor: "bg-orange-500/10",
       iconColor: "text-orange-500",
     },
