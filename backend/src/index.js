@@ -43,9 +43,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statRoutes)
-app.get("hi", (req, res) => {
-    res.status(200).json({message : "Hello"});
-});
 
 app.listen(PORT, ()=>{
     console.log(`Server Listening to PORT : ${PORT}`);

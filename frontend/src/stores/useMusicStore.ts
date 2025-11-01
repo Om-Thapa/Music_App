@@ -35,8 +35,8 @@ export const useMusicStore = create<MusicStore>((set) => ({
   featuredSongs: [],
   trendingSongs: [],
   stats: {
-    totalAlbums: 0,
     totalArtists: 0,
+    totalAlbums: 0,
     totalSongs: 0,
     totalUsers: 0,
   },
@@ -133,6 +133,7 @@ export const useMusicStore = create<MusicStore>((set) => ({
 
         set((state) => ({
             songs: state.songs.filter((song) => song._id !== id),
+            stats: { ...state.stats, totalSongs: state.stats.totalSongs - 1}
         }));
         toast.success("Song deleted successfully");
     } catch (error: any) {
@@ -147,9 +148,11 @@ export const useMusicStore = create<MusicStore>((set) => ({
     set({ isLoading: true, error: null});
     try {
         await axiosInstance.delete(`/admin/delete/${id}`);
+        
         set((state) => ({
             albums: state.albums.filter((album) => album._id !== id),
-            songs: state.songs.map((song) => state.albums.find(a => a._id === id )?.title ? { ...song, ablum: null } : song )
+            songs: state.songs.map((song) => state.albums.find(a => a._id === id )?.title ? { ...song, ablum: null } : song ),
+            stats: { ...state.stats , totalAlbums: state.stats.totalAlbums - 1, totalSongs: state.stats.totalAlbums - 1}
         }))
     } catch (error: any) {
         
