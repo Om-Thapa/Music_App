@@ -4,6 +4,7 @@ import { clerkMiddleware } from "@clerk/express";
 import fileUpload from "express-fileupload";
 import path from 'path';
 import cors from "cors"
+import { createServer } from "http";
 
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
@@ -12,11 +13,15 @@ import adminRoutes from "./routes/admin.route.js";
 import userRoutes from "./routes/user.route.js";
 import albumRoutes from "./routes/album.route.js";
 import statRoutes from "./routes/stat.route.js";
+import { initializeSocket } from "./lib/socket.js";
 
 config();
 const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
+
+const httpServer = createServer(app);
+initializeSocket(httpServer);
 
 app.use(express.json());
 app.use(
@@ -44,7 +49,7 @@ app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statRoutes)
 
-app.listen(PORT, ()=>{
+httpServer.listen(PORT, ()=>{
     console.log(`Server Listening to PORT : ${PORT}`);
     connectDB();
 })
