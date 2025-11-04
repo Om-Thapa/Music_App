@@ -20,8 +20,8 @@ const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
 
-const httpServer = createServer(app);
-initializeSocket(httpServer);
+const Server = createServer(app);
+initializeSocket(Server);
 
 app.use(express.json());
 app.use(
@@ -49,7 +49,7 @@ app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statRoutes)
 
-httpServer.listen(PORT, ()=>{
+Server.listen(PORT, ()=>{
     console.log(`Server Listening to PORT : ${PORT}`);
     connectDB();
 })
