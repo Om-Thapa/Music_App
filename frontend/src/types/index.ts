@@ -25,3 +25,10 @@ export interface Stats {
 	totalUsers: number;
 	totalArtists: number;
 }
+
+export interface User {
+	_id: string;
+	clerkId: string;
+	fullName: string;
+	imageUrl: string;
+}

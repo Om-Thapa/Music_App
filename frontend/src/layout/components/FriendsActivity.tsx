@@ -7,11 +7,11 @@ import { useEffect } from 'react'
 
 const FriendsActivity = () => {
     const { user } = useUser();
-    const { users, fetchUsers } = useUserStore();
-    const isPlaying = true
+    const { users, fetchUsers, onlineUsers, userActivities } = useUserStore();
+    const isPlaying = true;
     
     useEffect(()=>{
-        fetchUsers();
+        if( user) fetchUsers();
     }, [fetchUsers, user])
   return (
     <div className='h-full bg-zinc-900 rounded-lg flex flex-col'>
@@ -27,6 +27,9 @@ const FriendsActivity = () => {
         <ScrollArea className='flex-1'>
             <div className='p-4 space-y-4'>
                 {users.map((user) => {
+                    const activity = userActivities.get(user.clerkId);
+                    const idPlaying = activity && activity !== 'Idle';
+                    
                     return (
                         <div
                             key={user._id}
@@ -38,6 +41,9 @@ const FriendsActivity = () => {
                                         <AvatarImage src={user.imageUrl} alt={user.fullName} />
                                         <AvatarFallback>{user.fullName[0]}</AvatarFallback>
                                     </Avatar>
+                                    <div
+                                        className={`absolute bottom-0 right-0 size-3 rounded-full border-2 border-zinc-900 ${onlineUsers.has(user.clerkId)}`}
+                                    />
                                 </div>
                                 
                                 <div className='flex-1 min-w-0'>
@@ -47,9 +53,9 @@ const FriendsActivity = () => {
                                     </div>
 
                                     {isPlaying ? (
-                                        <div>
-                                            <div className='text-sm text-white font-medium truncate'>I love you</div>
-                                            <div className='text-sm text-zinc-400 truncate'>Ash King</div>
+                                        <div className='mt-1'>
+                                            <div className='text-sm text-white font-medium truncate'>{activity?.replace('Playing', "").split(" by")[0]}</div>
+                                            <div className='text-sm text-zinc-400 truncate'>{activity?.split(" by")[0]}</div>
                                         </div>
                                     ) : (
                                         <div className='text-sm text-zinc-400'>Idle</div>
@@ -65,7 +71,6 @@ const FriendsActivity = () => {
     </div>
   )
 }
-
 export default FriendsActivity
 
 const LoginPrompt = () => (

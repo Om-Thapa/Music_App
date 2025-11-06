@@ -1,9 +1,10 @@
 import { axiosInstance } from "@/lib/axios";
 import { create } from "zustand"
 import { io } from "socket.io-client";
+import type { User } from "@/types";
 
 interface UserStore {
-    users: any[];
+    users: User[];
     isLoading: boolean;
     error: string | null;
     socket: any;
