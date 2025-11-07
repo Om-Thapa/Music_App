@@ -19,7 +19,7 @@ export const initializeSocket = (server) => {
             // broadcast to all the connected sockets that this user has just logged in
             io.emit("user_connected", userId);
 
-            socket.emit("user_online", Array.from(userActivities.keys()));
+            socket.emit("user_online", Array.from(userSockets.keys()));
             io.emit("activities", Array.from(userActivities.entries()));
         })
 
@@ -28,11 +28,10 @@ export const initializeSocket = (server) => {
             io.emit("activity_updated", { userId, activity });
         });
 
-        socket.on('disconnected', () => {
+        socket.on('disconnect', () => {
             let disconnectedUserId;
-            for( const [ userId, socketId ] of userSockets.entries()){
-                //find the disconnected user
-                if( socketId === socket.id ){
+            for (const [userId, socketId] of userSockets.entries()) {
+                if (socketId === socket.id) {
                     disconnectedUserId = userId;
                     userSockets.delete(userId);
                     userActivities.delete(userId);
@@ -40,7 +39,7 @@ export const initializeSocket = (server) => {
                 }
             }
 
-            if(disconnectedUserId){
+            if (disconnectedUserId) {
                 io.emit("user_disconnected", disconnectedUserId);
             }
         })

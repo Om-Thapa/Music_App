@@ -23,11 +23,11 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
      currentIndex: -1,
 
      initializeQueue: (songs: Song[]) => {
-        set({
-            queue: songs,
-            currentSong: get().currentSong || songs[0],
-            currentIndex: get().currentIndex === -1 ? 0 : get().currentIndex,
-        });
+		 set({
+			 queue: songs,
+			 currentSong: get().currentSong || songs[0],
+			 currentIndex: get().currentIndex === -1 ? 0 : get().currentIndex,
+			});
      },
 
      playAlbum: (songs: Song[], startIndex = 0) => {
@@ -78,7 +78,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 			socket.emit("update_activiy", {
 				userId: socket.auth.userId,
 				activity:
-				willStartPlaying && currentSong ? 
+				get().isPlaying && currentSong ? 
 				`Playing ${currentSong.title} by ${currentSong.artist}` : 'Idle'
 			});
 		}

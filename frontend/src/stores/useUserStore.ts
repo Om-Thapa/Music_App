@@ -53,7 +53,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
 
         socket.emit("user_connected", userId);
         
-        socket.on("users_online", (users: string[]) => {
+        socket.on("user_online", (users: string[]) => {
             set({ onlineUsers: new Set(users)});
         });
 
@@ -62,9 +62,11 @@ export const useUserStore = create<UserStore>((set, get) => ({
         });
 
         socket.on("user_connected", (userId: string) => {
-            set((state) => ({
-                onlineUsers: new Set( ...state.onlineUsers, userId),
-            }));
+            set((state) => {
+                const newOnline = new Set(state.onlineUsers);
+                newOnline.add(userId);
+                return { onlineUsers: newOnline };
+            });
         });
 
         socket.on("user_disconnected", (userId: string) =>{

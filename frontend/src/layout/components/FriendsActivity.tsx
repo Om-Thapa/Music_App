@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 const FriendsActivity = () => {
     const { user } = useUser();
     const { users, fetchUsers, onlineUsers, userActivities } = useUserStore();
-    const isPlaying = true;
     
     useEffect(()=>{
         if( user) fetchUsers();
@@ -28,7 +27,7 @@ const FriendsActivity = () => {
             <div className='p-4 space-y-4'>
                 {users.map((user) => {
                     const activity = userActivities.get(user.clerkId);
-                    const idPlaying = activity && activity !== 'Idle';
+                    const isPlaying = activity && activity !== 'Idle';
                     
                     return (
                         <div
@@ -42,7 +41,7 @@ const FriendsActivity = () => {
                                         <AvatarFallback>{user.fullName[0]}</AvatarFallback>
                                     </Avatar>
                                     <div
-                                        className={`absolute bottom-0 right-0 size-3 rounded-full border-2 border-zinc-900 ${onlineUsers.has(user.clerkId)}`}
+                                        className={`absolute bottom-0 right-0 size-3 rounded-full border-2 border-zinc-900 ${onlineUsers.has(user.clerkId) ? "bg-green-500" : "bg-zinc-500"}`}
                                     />
                                 </div>
                                 
@@ -55,7 +54,7 @@ const FriendsActivity = () => {
                                     {isPlaying ? (
                                         <div className='mt-1'>
                                             <div className='text-sm text-white font-medium truncate'>{activity?.replace('Playing', "").split(" by")[0]}</div>
-                                            <div className='text-sm text-zinc-400 truncate'>{activity?.split(" by")[0]}</div>
+                                            <div className='text-xs text-zinc-400 truncate'>{activity?.split(" by")[1]}</div>
                                         </div>
                                     ) : (
                                         <div className='text-sm text-zinc-400'>Idle</div>
